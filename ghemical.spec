@@ -1,6 +1,6 @@
 %define	name	ghemical
 %define	version	2.10
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 Name:		%{name}
