@@ -14,7 +14,7 @@ Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	libghemical-devel = %{version} openbabel-devel >= 2.0
 BuildRequires:	bonoboui-devel f2c flex gtkglext-devel mopac7-devel >= 1.10
 BuildRequires:	libglade2.0-devel >= 2.4.0
-BuildRequires:	mesaglut-devel
+BuildRequires:	mesaglut-devel libSC-devel
 Requires:	libghemical-data = %{version}
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
