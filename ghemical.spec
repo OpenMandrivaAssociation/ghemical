@@ -10,7 +10,6 @@ License:	GPL
 Group:		Sciences/Chemistry
 Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tar.gz
 URL:		http://www.uku.fi/~thassine/ghemical/
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	libghemical-devel = %{version} openbabel-devel >= 2.0
 BuildRequires:	bonoboui-devel f2c flex gtkglext-devel mopac7-devel >= 1.10
 BuildRequires:	libglade2.0-devel >= 2.4.0
