@@ -3,26 +3,31 @@
 %define	release	%mkrel 3
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-License:	GPL
+Name:		ghemical
+Version:	2.10
+Release:	%mkrel 4
+License:	GPL+
 Group:		Sciences/Chemistry
 Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tar.gz
 URL:		http://www.uku.fi/~thassine/ghemical/
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	libghemical-devel = %{version} openbabel-devel >= 2.0
-BuildRequires:	bonoboui-devel f2c flex gtkglext-devel mopac7-devel >= 1.10
+BuildRequires:	ghemical-devel = %{version}
+BuildRequires:	openbabel-devel >= 2.0
+BuildRequires:	bonoboui-devel
+BuildRequires:	f2c
+BuildRequires:	flex
+BuildRequires:	gtkglext-devel
+BuildRequires:	mopac7-devel >= 1.10
 BuildRequires:	libglade2.0-devel >= 2.4.0
-BuildRequires:	mesaglut-devel libSC-devel
+BuildRequires:	mesaglut-devel
+BuildRequires:	libSC-devel
 Requires:	libghemical-data = %{version}
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 
 %description
-Ghemical is a computational chemistry software package released under the 
-GNU GPL.
+Ghemical is a computational chemistry application.
 Ghemical is written in C++. It has a graphical user interface (in fact, 
 a couple of them), and it supports both quantum-mechanics (semi-empirical 
 and ab initio) models and molecular mechanics models (there is an experimental
@@ -51,40 +56,31 @@ perl -pi -e "s#-lmopac7#-lmopac7 `pkg-config --libs libbonobo-2.0` `pkg-config -
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-install -d %{buildroot}%{_menudir}
-cat << EOF > %{buildroot}%{_menudir}/%{name}
-?package(ghemical): \
-	command="%{name}" \
-	icon="%{name}.png" \
-	needs="x11" \
-	section="More Applications/Sciences/Chemistry" \
-	title="Ghemical" \
-	longtitle="GNOME MM/QM Frontend" \
-	xdg="true"
-EOF
 
-install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
+install -m644 %{SOURCE11} -D %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+install -m644 %{SOURCE13} -D %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 install -d %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{name}
 Comment=GNOME MM/QM Frontend
-Exec=%{name}
+Exec=%{_bindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GNOME;GTK;Chemistry;X-MandrivaLinux-MoreApplications-Sciences-Chemistry;
+Categories=GNOME;GTK;Education;Science;Chemistry;
 EOF
 
 %post
 %{update_menus}
+%{update_icon_cache hicolor}
 
 %postun
 %{clean_menus}
+%{clean_icon_cache hicolor}
 
 %clean
 rm -rf %{buildroot}
@@ -94,9 +90,6 @@ rm -rf %{buildroot}
 %doc AUTHORS ChangeLog README NEWS TODO
 %{_bindir}/%{name}
 %{_datadir}/%{name}
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-%{_menudir}/%{name}
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
 
