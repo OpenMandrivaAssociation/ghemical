@@ -1,7 +1,7 @@
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 Name:		ghemical
 Version:	2.95
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL+
 Group:		Sciences/Chemistry
 Source0:	http://www.uku.fi/~thassine/projects/download/current/%{name}-%{version}.tar.gz
@@ -18,7 +18,7 @@ BuildRequires:	oglappth-devel
 BuildRequires:	libglade2.0-devel >= 2.4.0
 BuildRequires:	mesaglut-devel
 BuildRequires:	libSC-devel
-Requires:	libghemical-data = %{version}
+Requires:	libghemical-data >= %{version}
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
