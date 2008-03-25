@@ -7,6 +7,7 @@ Group:		Sciences/Chemistry
 Source0:	http://www.uku.fi/~thassine/projects/download/current/%{name}-%{version}.tar.gz
 URL:		http://www.uku.fi/~thassine/ghemical/
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	gcc-gfortran
 BuildRequires:	ghemical-devel >= %{version}
 BuildRequires:	openbabel-devel >= 2.0
 BuildRequires:	bonoboui-devel
