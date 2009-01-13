@@ -1,29 +1,34 @@
+Name:			ghemical
+Version:		2.98
+Release:		%mkrel 2
+
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
-Name:		ghemical
-Version:	2.98
-Release:	%mkrel 1
 License:	GPL+
 Group:		Sciences/Chemistry
-Source0:	http://www.uku.fi/~thassine/projects/download/current/%{name}-%{version}.tar.gz
-Patch0:		ghemical.diff
 URL:		http://www.uku.fi/~thassine/ghemical/
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0:	http://www.uku.fi/~thassine/projects/download/current/%{name}-%{version}.tar.gz
+Source11:	%{name}-16x16.png
+Source12:	%{name}-32x32.png
+Source13:	%{name}-48x48.png
+Patch0:		ghemical.diff
+
 BuildRequires:	gcc-gfortran
-BuildRequires:	ghemical-devel >= %{version}
-BuildRequires:	openbabel-devel >= 2.0
+BuildRequires:	ghemical-devel = %{version}
+BuildRequires:	openbabel-devel >= 2.2
 BuildRequires:	bonoboui-devel
 BuildRequires:	f2c
 BuildRequires:	flex
 BuildRequires:	gtkglext-devel
-BuildRequires:	mopac7-devel >= 1.13
-BuildRequires:	oglappth-devel
+BuildRequires:	mopac7-devel >= 1.14
+BuildRequires:	oglappth-devel >= 0.98
 BuildRequires:	libglade2.0-devel >= 2.4.0
-BuildRequires:	mesaglut-devel
+BuildRequires:	mesagl-devel
+BuildRequires:	mesaglu-devel
 BuildRequires:	libSC-devel
+Buildroot:	%{_tmppath}/%{name}-%{version}
+
 Requires:	libghemical-data >= %{version}
-Source11:	%{name}-16x16.png
-Source12:	%{name}-32x32.png
-Source13:	%{name}-48x48.png
+
 
 %description
 Ghemical is a computational chemistry application.
@@ -37,6 +42,8 @@ and a large set of visualization tools are currently available.
 %prep
 %setup -q
 %patch0 -p1
+#help : use default www-browser
+perl -pi -e "s|mozilla|www-browser|" src/gtk_app.cpp
 
 %build
 libtoolize --copy --force
@@ -49,9 +56,10 @@ CXXFLAGS="$RPM_OPT_FLAGS `pkg-config --cflags libbonobo-2.0` `pkg-config --cflag
 		--enable-openbabel \
 		--enable-shortcuts \
 		--enable-gamess
-#ugly hack, yeye..
-perl -pi -e "s#-lmopac7#-lmopac7 `pkg-config --libs libbonobo-2.0` `pkg-config --libs libbonoboui-2.0` -lglut -lf2c#g" src/Makefile
-%make
+
+%make LIBS="`pkg-config --libs libbonobo-2.0` `pkg-config --libs libbonoboui-2.0` \
+ `pkg-config libglade-2.0 --libs` `pkg-config gtkglext-1.0 --libs` \
+ -lghemical -lmopac7 -loglappth -lopenbabel -lf2c"
 
 %install
 rm -rf %{buildroot}
@@ -78,9 +86,7 @@ EOF
 %post
 %{update_menus}
 %{update_icon_cache hicolor}
-%endif
 
-%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %{clean_icon_cache hicolor}
