@@ -1,6 +1,6 @@
 Name:			ghemical
 Version:		2.98
-Release:		%mkrel 2
+Release:		%mkrel 3
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 License:	GPL+
