@@ -24,6 +24,7 @@ BuildRequires:	libglade2.0-devel >= 2.4.0
 BuildRequires:	mesagl-devel
 BuildRequires:	mesaglu-devel
 BuildRequires:	libSC-devel
+BuildRequires:	intltool
 Buildroot:	%{_tmppath}/%{name}-%{version}
 
 Requires:	libghemical-data >= %{version}
