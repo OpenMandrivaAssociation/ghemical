@@ -1,16 +1,15 @@
 Name:			ghemical
-Version:		2.98
-Release:		%mkrel 3
+Version:		2.99.1
+Release:		%mkrel 1
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
-License:	GPL+
+License:	GPLv2+
 Group:		Sciences/Chemistry
 URL:		http://www.uku.fi/~thassine/ghemical/
 Source0:	http://www.uku.fi/~thassine/projects/download/current/%{name}-%{version}.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		ghemical.diff
 
 BuildRequires:	gcc-gfortran
 BuildRequires:	ghemical-devel = %{version}
@@ -41,7 +40,6 @@ and a large set of visualization tools are currently available.
 
 %prep
 %setup -q
-%patch0 -p1
 #help : use default www-browser
 perl -pi -e "s|mozilla|www-browser|" src/gtk_app.cpp
 
