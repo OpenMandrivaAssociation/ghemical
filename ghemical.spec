@@ -99,6 +99,7 @@ rm -rf %{buildroot}
 %doc AUTHORS ChangeLog README NEWS TODO
 %{_bindir}/%{name}
 %{_datadir}/%{name}
+%{_datadir}/locale/*/LC_MESSAGES/%{name}.mo
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
 
