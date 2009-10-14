@@ -1,5 +1,5 @@
 Name:			ghemical
-Version:		2.99.1
+Version:		2.99.2
 Release:		%mkrel 1
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
@@ -12,7 +12,7 @@ Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 
 BuildRequires:	gcc-gfortran
-BuildRequires:	ghemical-devel = %{version}
+BuildRequires:	ghemical-devel >= 2.99.1
 BuildRequires:	openbabel-devel >= 2.2
 BuildRequires:	bonoboui-devel
 BuildRequires:	f2c
@@ -27,7 +27,7 @@ BuildRequires:	libSC-devel
 BuildRequires:	intltool
 Buildroot:	%{_tmppath}/%{name}-%{version}
 
-Requires:	libghemical-data >= %{version}
+Requires:	libghemical-data >= 2.99.1
 
 
 %description
