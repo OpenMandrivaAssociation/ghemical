@@ -1,6 +1,6 @@
 Name:			ghemical
 Version:		2.99.2
-Release:		%mkrel 1
+Release:		%mkrel 2
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 License:	GPLv2+
@@ -15,7 +15,7 @@ BuildRequires:	gcc-gfortran
 BuildRequires:	ghemical-devel >= 2.99.1
 BuildRequires:	openbabel-devel >= 2.2
 BuildRequires:	bonoboui-devel
-BuildRequires:	f2c
+BuildRequires:	f2c-devel
 BuildRequires:	flex
 BuildRequires:	gtkglext-devel
 BuildRequires:	mopac7-devel >= 1.14
