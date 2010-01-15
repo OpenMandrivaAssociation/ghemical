@@ -1,6 +1,6 @@
 Name:			ghemical
 Version:		2.99.2
-Release:		%mkrel 3
+Release:		%mkrel 4
 
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 License:	GPLv2+
@@ -78,8 +78,10 @@ Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GNOME;GTK;Education;Science;Chemistry;
+Categories=GNOME;GTK;Science;Chemistry;
 EOF
+
+%find_lang %{name}
 
 %if %mdkversion < 200900
 %post
@@ -94,12 +96,11 @@ EOF
 %clean
 rm -rf %{buildroot}
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README NEWS TODO
 %{_bindir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/locale/*/LC_MESSAGES/%{name}.mo
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
 
