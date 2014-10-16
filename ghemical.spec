@@ -1,31 +1,30 @@
-Name:			ghemical
-Version:		2.99.2
-Release:		%mkrel 6
-
+%define releasedate 20111012
+Name:		ghemical
+Version:	3.0.0
+Release:	3
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 License:	GPLv2+
 Group:		Sciences/Chemistry
-URL:		http://www.uku.fi/~thassine/ghemical/
-Source0:	http://www.uku.fi/~thassine/projects/download/current/%{name}-%{version}.tar.gz
+URL:		http://www.bioinformatics.org/ghemical/ghemical/index.html
+Source0:	http://www.bioinformatics.org/ghemical/download/release%{releasedate}/%{name}-%{version}.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 
 BuildRequires:	gcc-gfortran
-BuildRequires:	ghemical-devel >= 2.99.1
+BuildRequires:	ghemical-devel >= %{version}
 BuildRequires:	openbabel-devel >= 2.2
-BuildRequires:	bonoboui-devel
-BuildRequires:	f2c-devel
+BuildRequires:	pkgconfig(libbonoboui-2.0)
+BuildRequires:	f2c
 BuildRequires:	flex
 BuildRequires:	gtkglext-devel
 BuildRequires:	mopac7-devel >= 1.14
 BuildRequires:	oglappth-devel >= 0.98
-BuildRequires:	libglade2.0-devel >= 2.4.0
-BuildRequires:	mesagl-devel
-BuildRequires:	mesaglu-devel
-BuildRequires:	libSC-devel
+BuildRequires:	pkgconfig(libglade-2.0) >= 2.4.0
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	SC-devel
 BuildRequires:	intltool
-Buildroot:	%{_tmppath}/%{name}-%{version}
 
 Requires:	libghemical-data >= 2.99.1
 
@@ -45,11 +44,11 @@ and a large set of visualization tools are currently available.
 perl -pi -e "s|mozilla|www-browser|" src/gtk_app.cpp
 
 %build
-libtoolize --copy --force
-aclocal
-autoconf
-automake
-CXXFLAGS="$RPM_OPT_FLAGS `pkg-config --cflags libbonobo-2.0` `pkg-config --cflags libbonoboui-2.0`" \
+# never do like this...
+%define _disable_ld_no_undefined 1
+%define _disable_ld_as_needed 1
+
+autoreconf -fi
 %configure2_5x	--enable-threads \
 		--enable-bonobo \
 		--enable-openbabel \
@@ -58,10 +57,9 @@ CXXFLAGS="$RPM_OPT_FLAGS `pkg-config --cflags libbonobo-2.0` `pkg-config --cflag
 
 %make LIBS="`pkg-config --libs libbonobo-2.0` `pkg-config --libs libbonoboui-2.0` \
  `pkg-config libglade-2.0 --libs` `pkg-config gtkglext-1.0 --libs` \
- -lghemical -lmopac7 -loglappth -lopenbabel -lf2c"
+ -lghemical -lmopac7 -loglappth -lopenbabel -lf2c `sc-config --libs`"
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 install -m644 %{SOURCE11} -D %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
@@ -83,24 +81,9 @@ EOF
 
 %find_lang %{name}
 
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%{update_icon_cache hicolor}
-
-%postun
-%{clean_menus}
-%{clean_icon_cache hicolor}
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog README NEWS TODO
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
-
