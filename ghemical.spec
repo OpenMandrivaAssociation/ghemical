@@ -25,6 +25,8 @@ BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	SC-devel
 BuildRequires:	intltool
+BuildRequires:	blas-devel
+BuildRequires:	lapack-devel
 
 Requires:	libghemical-data >= 2.99.1
 
