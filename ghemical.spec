@@ -1,7 +1,7 @@
 %define releasedate 20111012
 Name:		ghemical
 Version:	3.0.0
-Release:	3
+Release:	4
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 License:	GPLv2+
 Group:		Sciences/Chemistry
