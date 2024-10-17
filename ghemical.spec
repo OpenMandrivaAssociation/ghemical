@@ -5,7 +5,7 @@ Release:	4
 Summary:	Molecular mechanics and quantum mechanics frontend for GNOME
 License:	GPLv2+
 Group:		Sciences/Chemistry
-URL:		http://www.bioinformatics.org/ghemical/ghemical/index.html
+URL:		https://www.bioinformatics.org/ghemical/ghemical/index.html
 Source0:	http://www.bioinformatics.org/ghemical/download/release%{releasedate}/%{name}-%{version}.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
