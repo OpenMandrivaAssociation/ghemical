@@ -11,6 +11,11 @@ Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gcc-gfortran
 BuildRequires:	ghemical-devel >= %{version}
 BuildRequires:	openbabel-devel >= 2.2
